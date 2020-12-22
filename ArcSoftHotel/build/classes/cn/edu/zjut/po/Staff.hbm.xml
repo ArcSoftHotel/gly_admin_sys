@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.edu.zjut.po.Staff" table="staff" catalog="ArcSoftHotel">
+        <id name="staffid" type="int">
+			<column name="staffid" unique="true" />
+		</id>
+		<property name="staffname" type="string">
+			<column name="staffname" length="10" />
+		</property>
+		<property name="department" type="string">
+			<column name="department" length="10" />
+		</property>
+		<property name="status" type="string">
+			<column name="status" length="10" />
+		</property>
+		<property name="phone" type="string">
+			<column name="phone" length="20" />
+		</property>
+    </class>
+</hibernate-mapping>

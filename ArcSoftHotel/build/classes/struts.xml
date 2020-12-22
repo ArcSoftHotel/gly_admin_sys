@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="strutsBean" extends="struts-default"
+		namespace="/">
+		<action name="login" class="cn.edu.zjut.action.UserAction">
+			<result name="success">/loginSuccess.jsp</result>
+			<result name="fail">/test.html</result>
+		</action>
+		<action name="allRooms" class="cn.edu.zjut.action.RoomAction"
+			method="getAllRooms">
+			<result name="success">/roomList.jsp</result>
+		</action>
+		<action name="addRoom" class="cn.edu.zjut.action.RoomAction"
+			method="addRoom">
+			<result name="success">/loginSuccess.jsp</result>
+		</action>
+		<action name="updateRoom" class="cn.edu.zjut.action.RoomAction"
+			method="updateRoom">
+			<result name="success">/loginSuccess.jsp</result>
+		</action>
+		<action name="deleteRoom" class="cn.edu.zjut.action.RoomAction"
+			method="deleteRoom">
+			<result name="success">/loginSuccess.jsp</result>
+		</action>
+		<action name="allStaffs" class="cn.edu.zjut.action.StaffAction"
+			method="getAllStaffs">
+			<result name="success">/staffList.jsp</result>
+		</action>
+		<action name="addStaff" class="cn.edu.zjut.action.StaffAction"
+			method="addStaff">
+			<result name="success">/loginSuccess.jsp</result>
+		</action>
+		<action name="updateStaff" class="cn.edu.zjut.action.StaffAction"
+			method="updateStaff">
+			<result name="success">/loginSuccess.jsp</result>
+		</action>
+		<action name="deleteStaff" class="cn.edu.zjut.action.StaffAction"
+			method="deleteStaff">
+			<result name="success">/loginSuccess.jsp</result>
+		</action>
+	</package>
+</struts>

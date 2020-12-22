@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.edu.zjut.po.User" table="user" catalog="ArcSoftHotel">
+		<id name="account" type="string">
+			<column name="account" length="30" unique="true" />
+		</id>
+		<property name="password" type="string">
+			<column name="password" length="30" />
+		</property>
+		<property name="usertype" type="string">
+			<column name="usertype" length="10" />
+		</property>
+    </class>
+</hibernate-mapping>
