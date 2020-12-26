@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true">
+<Resource
+    name="jdbc/ArcSoftHotel"
+    type="javax.sql.DataSource"
+    maxTotal="6"
+    maxTdle="2"
+    driverClassName="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/ArcSoftHotel?useSSL=false&amp;serverTimezone=UTC"
+    username="root"
+    password="xide9596"
+    allowCasualMultipartParsing="true"
+    maxWaitMillis="5000" />
+</Context>
