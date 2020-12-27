@@ -14,7 +14,7 @@ public class AdminDao extends MySqlUtil {
     private PreparedStatement psmt = null;
     private ResultSet rs = null;
 
-    public Admin Login_A(String adminid,String password){
+    public Admin Login_A(String adminid,String password) throws SQLException{
         String sql="select * from admin where adminid=? AND password=?";
         Admin admin=new Admin();
         try {
@@ -36,8 +36,10 @@ public class AdminDao extends MySqlUtil {
             conn.close();
 
         } catch (SQLException throwables) {
+        	conn.close();
             throwables.printStackTrace();
         }
+        conn.close();
         return admin;
     }
 

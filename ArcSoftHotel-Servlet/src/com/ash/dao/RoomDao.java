@@ -14,7 +14,7 @@ public class RoomDao extends MySqlUtil{
     private PreparedStatement psmt = null;
     private ResultSet rs = null;
     
-    public ArrayList<Room> getAllRooms(){
+    public ArrayList<Room> getAllRooms() throws SQLException{
     	ArrayList<Room> array = new ArrayList<>();
     	String sql="select * from room";
     	 try {
@@ -31,12 +31,14 @@ public class RoomDao extends MySqlUtil{
                  array.add(Room);
              }
          } catch (SQLException throwables) {
-             throwables.printStackTrace();
+             conn.close();
+        	 throwables.printStackTrace();          
          }
+    	 conn.close();
          return  array;
     }
     
-    public boolean addRoom(Room room) {
+    public boolean addRoom(Room room) throws SQLException {
     	String sql="insert into room values (?,?,?,?,?) ";
    	 try {
             conn=dataSource.getConnection();
@@ -49,12 +51,14 @@ public class RoomDao extends MySqlUtil{
             int result=psmt.executeUpdate();
             if(result<=0) return false;
         } catch (SQLException throwables) {
+        	conn.close();
             throwables.printStackTrace();
         }
+   	    conn.close();
 		return true;
     }
     
-    public boolean updateRoom(Room room) {
+    public boolean updateRoom(Room room) throws SQLException {
     	String sql="update room set roomtype=?,"
     			+ "roomprice=?,status=?,roomimg=? where roomid=?";
       	 try {
@@ -68,12 +72,14 @@ public class RoomDao extends MySqlUtil{
                int result=psmt.executeUpdate();
                if(result<=0) return false;
            } catch (SQLException throwables) {
+        	   conn.close();
                throwables.printStackTrace();
            }
-   		return true;
+      	 conn.close();
+      	 return true;
     }
     
-    public boolean deleteRoom(Integer roomid) {
+    public boolean deleteRoom(Integer roomid) throws SQLException {
     	String sql="delete from room where roomid=?";
     	try {
             conn=dataSource.getConnection();
@@ -82,8 +88,10 @@ public class RoomDao extends MySqlUtil{
             int result=psmt.executeUpdate();
             if(result<=0) return false;
         } catch (SQLException throwables) {
+        	conn.close();
             throwables.printStackTrace();
         }
-		return true;
+    	conn.close();
+    	return true;
     }
 }

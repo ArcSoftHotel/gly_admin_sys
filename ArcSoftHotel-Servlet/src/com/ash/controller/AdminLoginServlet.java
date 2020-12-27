@@ -1,6 +1,7 @@
 package com.ash.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,15 +31,21 @@ public class AdminLoginServlet extends HttpServlet {
         AdminDao adminDao=new AdminDao();
         String username=request.getParameter("loginName");
         String password=request.getParameter("loginPwd");
-        if(adminDao.Login_A(username,password)!=null){
-            //利用session进行存储
-            HttpSession session=request.getSession();
-            synchronized(session)
-            {
-                session.setAttribute("user",adminDao.Login_A(username,password));
-            }
-            response.sendRedirect("loginSuccess.jsp");
-        }
+        try {
+			if(adminDao.Login_A(username,password)!=null){
+			    //利用session进行存储
+			    HttpSession session=request.getSession();
+			    synchronized(session)
+			    {
+			        session.setAttribute("user",adminDao.Login_A(username,password));
+			    }
+			    response.sendRedirect("loginSuccess.jsp");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         
 	}
 

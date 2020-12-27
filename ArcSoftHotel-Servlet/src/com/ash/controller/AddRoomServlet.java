@@ -1,6 +1,7 @@
 package com.ash.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,10 +25,18 @@ public class AddRoomServlet extends HttpServlet {
 		room.setRoomprice(Double.parseDouble(request.getParameter("roomprice")));
 		room.setStatus(request.getParameter("status"));
 		room.setRoomimg(request.getParameter("roomimg"));
-		if(!dao.addRoom(room)) {
-			request.setAttribute("result","出现了未知的错误.");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
+		try {
+			if(!dao.addRoom(room)) {
+				request.setAttribute("result","出现了未知的错误.");
+			    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+			    rd.forward(request, response);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		response.sendRedirect("loginSuccess.jsp");	
 	}

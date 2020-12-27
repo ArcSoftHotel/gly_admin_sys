@@ -1,6 +1,7 @@
 package com.ash.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,10 +24,18 @@ public class AddStaffServlet extends HttpServlet {
 		staff.setDuty(request.getParameter("duty"));
 		staff.setStatus(request.getParameter("status"));
 		staff.setPhone(request.getParameter("phone"));
-		if(!dao.addStaff(staff)) {
-			request.setAttribute("result","出现了未知的错误.");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
+		try {
+			if(!dao.addStaff(staff)) {
+				request.setAttribute("result","出现了未知的错误.");
+			    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+			    rd.forward(request, response);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		response.sendRedirect("loginSuccess.jsp");	
 	}

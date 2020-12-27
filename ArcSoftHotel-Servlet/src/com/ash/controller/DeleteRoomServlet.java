@@ -1,6 +1,7 @@
 package com.ash.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,10 +16,20 @@ import com.ash.dao.RoomDao;
 public class DeleteRoomServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RoomDao dao = new RoomDao();
-		if(!dao.deleteRoom(Integer.parseInt(request.getParameter("roomid")))) {
-			request.setAttribute("result","出现了未知的错误.");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
+		try {
+			if(!dao.deleteRoom(Integer.parseInt(request.getParameter("roomid")))) {
+				request.setAttribute("result","出现了未知的错误.");
+			    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+			    rd.forward(request, response);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		response.sendRedirect("loginSuccess.jsp");
 	}

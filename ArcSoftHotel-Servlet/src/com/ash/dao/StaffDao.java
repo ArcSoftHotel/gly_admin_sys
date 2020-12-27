@@ -14,7 +14,7 @@ public class StaffDao extends MySqlUtil{
     private PreparedStatement psmt = null;
     private ResultSet rs = null;
     
-    public ArrayList<Staff> getAllStaffs(){
+    public ArrayList<Staff> getAllStaffs() throws SQLException{
     	ArrayList<Staff> array = new ArrayList<>();
     	String sql="select * from staff";
     	 try {
@@ -32,12 +32,14 @@ public class StaffDao extends MySqlUtil{
                  array.add(staff);
              }
          } catch (SQLException throwables) {
+        	 conn.close();
              throwables.printStackTrace();
          }
+    	 conn.close();
          return  array;
     }
     
-    public boolean addStaff(Staff staff) {
+    public boolean addStaff(Staff staff) throws SQLException {
     	String sql="insert into staff values (?,?,?,?,?) ";
     	 try {
              conn=dataSource.getConnection();
@@ -50,12 +52,14 @@ public class StaffDao extends MySqlUtil{
              int result=psmt.executeUpdate();
              if(result<=0) return false;
          } catch (SQLException throwables) {
+        	 conn.close();
              throwables.printStackTrace();
          }
+    	conn.close();
 		return true;
     }
     
-    public boolean updateStaff(Staff staff) {
+    public boolean updateStaff(Staff staff) throws SQLException {
     	String sql="update staff set staffname=?,duty=?,"
     			+ "status=?,phone=? where staffid=?";
    	 try {
@@ -69,12 +73,14 @@ public class StaffDao extends MySqlUtil{
             int result=psmt.executeUpdate();
             if(result<=0) return false;
         } catch (SQLException throwables) {
+        	conn.close();
             throwables.printStackTrace();
         }
+   	    conn.close();
 		return true;
     }
     
-    public boolean deleteStaff(Integer staffid) {
+    public boolean deleteStaff(Integer staffid) throws SQLException {
     	String sql="delete from staff where staffid=?";
    	 try {
             conn=dataSource.getConnection();
@@ -83,8 +89,10 @@ public class StaffDao extends MySqlUtil{
             int result=psmt.executeUpdate();
             if(result<=0) return false;
         } catch (SQLException throwables) {
+        	conn.close();
             throwables.printStackTrace();
         }
-		return true;
+   	 conn.close();	
+   	 return true;
     }
 }
