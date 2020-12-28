@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ page import="com.ash.entity.Room" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>主页</title>
+    <title>更新消费信息</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
@@ -186,7 +187,7 @@
                 </li>
 
                 <li>
-                    <a href="consumeList.jsp">
+                    <a href="../../roomConsumeSel.do">
                         <i class="fa fa-table"></i> <span>房间消费查询</span>
                         <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">所有消费记录</small>-->
@@ -286,7 +287,96 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                更新消费信息
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">房客管理</a></li>
+                <li class="active">更新消费信息</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <form method="post" action="UpdateConsume">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">请输入房客信息</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>用户名：</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                                <input name="userid" id="userid" type="text" class="form-control"
+                                value="<%=new String(request.getParameter("userid").getBytes("ISO8859_1"),"utf-8")%>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>房间号：</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                                <input name="roomid" id="roomid" type="text" class="form-control"
+                                value="<%=new String(request.getParameter("roomid").getBytes("ISO8859_1"),"utf-8")%>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>房间价格：</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                                <input name="roomprice" id="roomprice" type="text" class="form-control"
+                                value="<%=new String(request.getParameter("roomprice").getBytes("ISO8859_1"),"utf-8")%>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>服务消费：</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa  fa-key"></i>
+                                </div>
+                                <input name="service_price" id="service_price" type="text" class="form-control"
+                                value="<%=new String(request.getParameter("service_price").getBytes("ISO8859_1"),"utf-8")%>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>更新时间：</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                                <input name="date" id="date" type="text" class="form-control"
+                                value="<%=new String(request.getParameter("date").getBytes("ISO8859_1"),"utf-8")%>">
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary pull-right" style="margin-left: 20px">确定</button>
+                            <button type="reset" class="btn btn-default pull-right">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /.box-body -->
+        </section>
+    </div>
+    <!-- /.box -->
+
+    </section>
     <!-- /.content -->
 </div>
 
