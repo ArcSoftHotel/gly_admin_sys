@@ -1,7 +1,6 @@
 package com.ash.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,39 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
 import com.ash.dao.ConsumeDao;
-import com.ash.entity.Consume;
 
-@WebServlet("/UpdateConsume")
-public class UpdateConsumeServlet extends HttpServlet {
+@WebServlet("/DeleteConsume")
+public class DeleteConsumeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html:charset=utf-8");
 		ConsumeDao dao = new ConsumeDao();
-		Consume consume = new Consume();
-		consume.setUserid(request.getParameter("userid"));
-		consume.setRoomid(Integer.parseInt(request.getParameter("roomid")));
-		consume.setRoomprice(Double.parseDouble(request.getParameter("roomprice")));
-		consume.setService_price(Double.parseDouble(request.getParameter("service_price")));
-		consume.setDate(Date.valueOf(request.getParameter("date")));
 		try {
-			if(!dao.updateConsume(consume)) {
-				JOptionPane.showMessageDialog(null, "更新失败，出现了待解决的问题！");
+			if(!dao.deleteConsume(request.getParameter("userid"),Integer.parseInt(request.getParameter("roomid")))) {
+				JOptionPane.showMessageDialog(null, "删除失败，出现了待解决的问题！");
 				request.setAttribute("result","出现了未知的错误.");
 			    RequestDispatcher rd = getServletContext().getRequestDispatcher("/adminLogin.jsp");
 			    rd.forward(request, response);
-			    return;
 			}
-		}catch (SQLException e) {
+		}catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}		
 		response.sendRedirect("loginSuccess.jsp");
-		JOptionPane.showMessageDialog(null, "更新成功！");
+		JOptionPane.showMessageDialog(null, "删除成功！");
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
