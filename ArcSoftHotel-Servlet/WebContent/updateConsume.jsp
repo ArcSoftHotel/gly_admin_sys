@@ -161,16 +161,17 @@
                 </div>
             </div>
             <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="查找信息...">
-                    <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
+            <form action="SelectConsume" method="post" class="sidebar-form">
+					<div class="input-group">
+						<input type="text" name="userid" class="form-control"
+							placeholder="查找信息..."> <span class="input-group-btn">
+							<button type="submit" name="search" id="search-btn"
+								class="btn btn-flat">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+					</div>
+				</form>
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
@@ -305,7 +306,7 @@
             <form method="post" action="UpdateConsume">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">请输入房客信息</h3>
+                        <h3 class="box-title">请输入消费信息</h3>
                     </div>
 
                     <div class="box-body">
